@@ -1,9 +1,10 @@
-﻿
+﻿using System;
 
 namespace TextAdventure
 {
     class Program
     {
+        public static Player currentPlayer = new Player();
 
         static void Main(string[] args)
         {
