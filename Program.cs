@@ -31,9 +31,8 @@ namespace TextAdventure
             Console.ReadKey();
             Console.Clear();
             Console.WriteLine("You grope around in the darkness until you find a door handl. You feel some resistance as");
-            Console.WriteLine("you turn the handle, but the rusty lock breaks with little efoort. You see your captor");
-            Console.WriteLine("standing with his back to you outside the door.");
-            
+            Console.WriteLine("you turn the handle, but the rusty lock breaks with little effort. You see your captor...");
+            Console.WriteLine("He is standing with his back to you outside the door.");
 
         }
 

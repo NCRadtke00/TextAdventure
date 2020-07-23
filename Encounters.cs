@@ -14,6 +14,7 @@ namespace TextAdventure
             Console.WriteLine("You throw open the door and grab a rusty metal sword while charging toward your captor");
             Console.WriteLine("He turns...");
             Console.ReadKey();
+            Console.Clear();
             Combat(false, "Human Rouge", 1, 4);
         }
         // Encounter Tools
@@ -34,6 +35,8 @@ namespace TextAdventure
             }
             while (h > 0)
             {
+                Console.WriteLine(n);
+                Console.WriteLine(p + "/" + h);
                 Console.WriteLine("=====================");
                 Console.WriteLine("| (A)ttack (D)efend |");
                 Console.WriteLine("|  (R)un)   (H)eal  |");
@@ -50,7 +53,7 @@ namespace TextAdventure
                         damage = 0;
                     }
                     int attack = rand.Next(0, Program.currentPlayer.weaponValue) + rand.Next(1, 4);
-                    Console.WriteLine("You lose" + damage + "health and deal " + attack + " damage");
+                    Console.WriteLine("You lose " + damage + " health and deal " + attack + " damage");
                     Program.currentPlayer.health -= damage;
                     h -= attack;
                 }
