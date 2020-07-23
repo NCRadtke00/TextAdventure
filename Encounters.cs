@@ -14,6 +14,7 @@ namespace TextAdventure
             Console.WriteLine("You throw open the door and grab a rusty metal sword while charging toward your captor");
             Console.WriteLine("He turns...");
             Console.ReadKey();
+            Combat(false, "Human Rouge", 1, 4);
         }
         // Encounter Tools
         public static void Combat(bool random, string name, int power, int health)
@@ -94,13 +95,22 @@ namespace TextAdventure
                     if (Program.currentPlayer.potion == 0)
                     {
                         Console.WriteLine("As you desperatly grasp for a potion in your bag, all that you feel are empty glass flasks.");
-                        Console.WriteLine("The" + n + "strikes you with a might blow and you lose" +/* damage+ */"health");
+                        
                         int damage = p - Program.currentPlayer.armorValue;
                         if (damage < 0)
                         {
                             damage = 0;
                         }
+                        Console.WriteLine("The" + n + "strikes you with a might blow and you lose" +damage+ "health");
                     }
+                    else
+                    {
+                        Console.WriteLine("You reach into your bag nad pull out a glowing, purple flask. You take a refreshing drink.");
+                        int potionV = 5;
+                        Console.WriteLine("You have gained" +potionV+ "health back");
+                        Program.currentPlayer.health += potionV;
+                    }
+                    Console.ReadKey();
                 }
                 Console.ReadKey();
             }
