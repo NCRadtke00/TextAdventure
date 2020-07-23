@@ -9,7 +9,7 @@ namespace TextAdventure
         static void Main(string[] args)
         {
             Start();
-            Encounters.FirstEncounter
+            Encounters.FirstEncounter();
         }
 
         static void Start()
