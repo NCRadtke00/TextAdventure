@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+
 
 namespace TextAdventure
 {
@@ -13,6 +16,11 @@ namespace TextAdventure
      
         static void Main(string[] args)
         {
+            if(!Directory.Exists("saves"))
+            {
+                Directory.CreateDirectory("saves");
+
+            }
             Start();
             Encounters.FirstEncounter();
             while (mainLoop)
@@ -49,6 +57,86 @@ namespace TextAdventure
             Console.WriteLine("He is standing with his back to you outside the door.");
 
         }
+        public static void Save()
+        {
+            BinaryFormatter binForm = new BinaryFormatter();
+            string path = "saves/" + currentPlayer.id.ToString();
+            FileStream file = File.Open(path, FileMode.OpenOrCreate);
+            bindForm.Serialize(file, currentPlayer);
+            file.Close();
+        }
+        public static Player Load()
+        {
+            Console.Clear();
+            Console.WriteLine("Chose your saved file: ");
+            string[] paths = Directory.GetDirectories("saves");
+            List<Player> players = new List<Player>();
 
+            BinaryFormatter binForm = new BinaryFormatter();
+            foreach (string p in paths)
+            {
+                FileStream file = File.Open(p, FileMode.Open);
+                Player player = (Player)binForm.Deserialize(file);
+                file.Close();
+                players.Add(player);
+            }
+
+          
+
+            bool b = true;
+            while (true)
+            {
+                Console.Clear();
+                Console.WriteLine("Choose your player: ");
+
+                foreach (Player p in players)
+                {
+                Console.WriteLine(p.id+ " : " + p.name);
+                }
+                Console.WriteLine("Please input player name or id (id:# or playername)");
+                string[] data = Console.ReadLine().Split(':');
+
+                try
+                {
+                    if (data[0] == "id")
+                    {
+                        if (int.TryParse(data[1], out int id))
+                        {
+                            foreach (Player player in players)
+                            {
+                                if (player.id == id)
+                                {
+                                    return player;
+                                }
+                            }
+                            Console.WriteLine("there is no player with that id!");
+                            Console.ReadLine();
+                        }
+                        else
+                        {
+                            Console.WriteLine("Your id needs to be a number! Press any key to continue!");
+                            Console.ReadLine();
+                        }
+                    }
+                    else 
+                    {
+                        foreach (Player player in players)
+                        {
+                            if(player.name == data[0])
+                            {
+                                return player;
+                            }
+                        }
+                        Console.WriteLine("There is no player with that name!");
+                        Console.ReadLine();
+                    }
+                }
+                catch (IndexOutOfRangeException)
+                {
+                    Console.WriteLine("Your id needs to be a number! Press any key to continue!");
+                    Console.ReadLine();
+                }
+            }
+        }
     }
 }

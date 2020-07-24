@@ -6,9 +6,11 @@ namespace TextAdventure
 {
     public class Player
     {
+        [Serializable]
         Random rand = new Random();
         
         public string name;
+        public int id;
         public int coins = 30000;
         public int health = 10;
         public int damage = 1;
@@ -31,6 +33,11 @@ namespace TextAdventure
             int lower = (mods + 1);
             return rand.Next(lower, upper);
         }
-
+        public int GetCoins()
+        {
+            int upper = (15 * mods + 50);
+            int lower = (10 * mods + 10);
+            return rand.Next(lower, upper);
+        }
     }
 }

@@ -30,7 +30,7 @@ namespace TextAdventure
             Console.WriteLine("The door flys open!");
             Console.WriteLine("An old blad man, carrying a large tome quickly approaches.");
             Console.ReadKey();
-            Combat(false, "Les", 10, 50);
+            Combat(false, "Lester", 10, 50);
         }
         public static void ThePawnEncounter()
         {
@@ -172,7 +172,7 @@ namespace TextAdventure
                 }
                 Console.ReadKey();
             }
-            int c = rand.Next(10, 50);
+            int c = Program.currentPlayer.GetCoins();
             Console.WriteLine("As you stand victorious over "+n+" its body dissolves into "+c+" gold coins!");
             Program.currentPlayer.coins += c;
             Console.ReadKey();
